@@ -1,10 +1,8 @@
-from sqlalchemy import Column, Integer, Boolean, ForeignKey, DateTime
-from sqlalchemy.orm import relationship
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, Integer, Boolean, ForeignKey, DateTime # type: ignore
+from sqlalchemy.ext.declarative import declarative_base # type: ignore
 from datetime import datetime
 from config import session,engine
-from user import User  # To reference student_id
-from courses import Course  # To reference course_id
+from tabulate import tabulate # type: ignore
 
 Base = declarative_base()
 
@@ -12,9 +10,9 @@ class Enrollment(Base):
     __tablename__ = 'enrollments'
 
     id = Column(Integer, primary_key=True)
-    student_id = Column(Integer, nullable=False)
-    course_id = Column(Integer, nullable=False)
-    is_enrolled = Column(Boolean, default=True)
+    student_id = Column(Integer(), nullable=False)
+    course_id = Column(Integer(), nullable=False)
+    is_enrolled = Column(Boolean(), default=True)
     enrollment_date = Column(DateTime, default=datetime.now())
 
     def __init__(self,student_id,course_id,is_enrolled=True):
@@ -44,3 +42,17 @@ def update_enrollment(self, is_enrolled):
 def delete_enrollment(self):
     session.delete(self)
     session.commit()
+
+#method that returns course ids and a tabular presentation of courses a student is enrolled to
+def student_enrollments(student_id):
+    from courses import course_instance
+    enrollments=session.query(Enrollment).filter_by(student_id=student_id,is_enrolled=1).all()
+    student_courses=[course_instance(enrollment.course_id) for enrollment in enrollments]
+    headers=["ID","Course Title","Category"]
+    rows=[[course.id,course.title,course.category] for course in student_courses]
+    table=tabulate(rows,headers=headers,tablefmt="fancy_grid")
+    course_ids=[course.id for course in student_courses]
+    if len(rows)==0:
+        return None
+    else:
+        return {"table":table,"course_ids":course_ids}

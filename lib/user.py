@@ -1,7 +1,7 @@
-from sqlalchemy import Column, Integer, String
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import validates
-from sqlalchemy.exc import NoResultFound
+from sqlalchemy import Column, Integer, String # type: ignore
+from sqlalchemy.ext.declarative import declarative_base # type: ignore
+from sqlalchemy.orm import validates # type: ignore
+from sqlalchemy.exc import NoResultFound # type: ignore
 from config import engine, session
 from datetime import datetime
 
@@ -10,17 +10,17 @@ Base = declarative_base()
 class User(Base):
     __tablename__ = 'users'
 
-    id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False)
-    email = Column(String, unique=True, nullable=False)
-    password = Column(String, nullable=False)  # Store hashed password in practice
-    role=Column(String)
-    created_at=Column(String)
+    id = Column(Integer(), primary_key=True)
+    name = Column(String(), nullable=False)
+    email = Column(String(), unique=True, nullable=False)
+    password = Column(String(), nullable=False)  
+    role=Column(String())
+    created_at=Column(String())
 
     def __init__(self, name, email, password,role="Admin"):
         self.name = name
         self.email = email
-        self.password = password  # Hash password in practice
+        self.password = password  
         self.role=role
         self.created_at=datetime.now()
 
@@ -36,6 +36,7 @@ class User(Base):
 # Create the table
 Base.metadata.create_all(engine)
 
+#method to create a new user
 def create_user(name, email, password,role="Admin"):
     """Create a new user."""
     user = User(name=name, email=email, password=password,role=role)
@@ -44,15 +45,13 @@ def create_user(name, email, password,role="Admin"):
     print(f"User created: {user}")
     return user
 
-# def add_new_user(name, email, password):
-#     """Add a new user to the database."""
-#     return create_user(name, email, password)
-
+#method to delete the table
 def delete_table():
     """Drop the users table."""
     Base.metadata.drop_all(engine)
     print("Users table deleted.")
 
+#method to delete a user
 def delete_user(user_id):
     """Delete a user by ID."""
     user = session.query(User).filter_by(id=user_id).one()
@@ -63,10 +62,11 @@ def delete_user(user_id):
     else:
         print(f"No user found with ID {user_id}.")
 
+#method to update user details
 def update_user(user_id, name=None, email=None, password=None):
     """Update user information."""
-    try:
-        user = session.query(User).filter_by(id=user_id).one()
+    user = session.query(User).filter_by(id=user_id).one()
+    if user:
         if name:
             user.name = name
         if email:
@@ -75,9 +75,10 @@ def update_user(user_id, name=None, email=None, password=None):
             user.password = password  # Hash password in practice
         session.commit()
         print(f"User with ID {user_id} updated: {user}")
-    except NoResultFound:
+    else:
         print(f"No user found with ID {user_id}.")
 
+#method to return a user filtered by email for login purposes
 def login(email):
     user=session.query(User).filter_by(email=email).one()
     return user

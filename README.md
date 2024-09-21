@@ -9,20 +9,19 @@ To address these challenges, I will develop an Online Course Platform using Pyth
 # Deliverables
 
 ## Database Design
-![alt text](<assets/Screenshot from 2024-09-17 11-16-45.png>)
+![alt text](<Screenshot from 2024-09-21 15-26-43.png>)
 
 ### Users Table: 
 Stores user information, including user role (student or instructor), name, email, and password.
 ### Courses Table: 
-Stores information about each course, including title, description, instructor ID, category, and difficulty level.
+Stores information about each course, including title,  instructor ID, category.
 ### Lessons Table: 
 Stores lesson content and materials, linked to courses.
 ### Enrollments Table: 
 Tracks which students are enrolled in which courses, and stores completion status.
 ### Quizzes Table: 
 Stores quiz questions, options, and correct answers, linked to specific courses.
-### Progress Table: 
-Tracks student progress for each course and lesson.
+
 
 ## User Management
 
@@ -42,21 +41,13 @@ Lesson Management: Instructors can add lessons to their courses.
 Implement predefined categories like Science, Technology, Business, Arts, etc.
 ### Assignments and Quizzes: 
 Instructors can create quizzes and assignments for their courses, specifying questions, options, and correct answers.
-### Course Progress Tracking: 
-Instructors can track student progress, view the completion rate, and see quiz results.
+
 
 ## Course Enrollment and Learning (Student)
 
-### Browse Courses: 
-Students can browse available courses by category
-### Search Functionality: 
-Implement a search bar to allow students to search for specific courses by keyword
-### Enroll in Courses: 
-Students can enroll in courses they are interested in, and the enrollment status will be saved in the database.
 ### View Course Content: 
 After enrolling, students can access course lessons, assignments, and quizzes.
-### Track Progress: 
-The system will track students' progress through lessons, assignments, and quizzes, and display a progress bar for each course.
+
 ### View Quiz Results: 
 Students can take quizzes and view their results after completion.
 
