@@ -36,7 +36,7 @@ class User(Base):
 
 # Create the table
 Base.metadata.create_all(engine)
-
+# Base.metadata.drop_all(engine)
 #method to create a new user
 def create_user(name, email, password,role="Admin"):
     """Create a new user."""
