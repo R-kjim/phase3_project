@@ -6,6 +6,13 @@ Instructors also need a platform to easily create, manage, and distribute course
 # Solution Statement
 To address these challenges, I will develop an Online Course Platform using Python and SQLite. This platform will allow instructors to create and manage courses, add lessons and materials, and track student progress. Students will be able to enroll in courses, view lessons, and track their performance through quizzes and or assignments. The system will provide functionalities for course addition and progress tracking, ensuring that both students and instructors can engage effectively in a seamless learning experience.
 
+# Run program
+To run this program, run the following commands:
+    -pipenv install
+    -pipenv shell
+    -python3 lib/runfile.py
+
+
 # Deliverables
 
 ## Database Files
