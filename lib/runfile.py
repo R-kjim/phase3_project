@@ -25,16 +25,15 @@ def prompt_user_details():
     name = Prompt.ask("Enter user name")
     email = Prompt.ask("Enter user email")
     password = Prompt.ask("Enter user password", password=True)
-    # role=Prompt.ask("Enter your role")
 
     # Validate user input
     if not name or not email or not password:
         raise ValueError("All fields are required")
 
-    # Create user (replace with your actual user creation logic)
     user = create_user(name, email, password)
-    console.print(f"User created{user}", style="bold green")
+    start_page()
 
+    
 def login_fn():
     email=Prompt.ask("Enter your email")
     password=Prompt.ask("Enter your password", password=True)
@@ -198,4 +197,3 @@ def student_menu(value):
 
 start_page()
 
-# print(all_course_lessons(int("1"))["table"])

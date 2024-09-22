@@ -1,5 +1,5 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine # type: ignore
+from sqlalchemy.orm import sessionmaker # type: ignore
 
 # Database URL
 DATABASE_URL = 'sqlite:///course_project.db' 

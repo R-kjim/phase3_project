@@ -1,10 +1,10 @@
 from sqlalchemy import Column, Integer, String # type: ignore
 from sqlalchemy.ext.declarative import declarative_base # type: ignore
 from sqlalchemy.orm import validates # type: ignore
-from sqlalchemy.exc import NoResultFound # type: ignore
 from config import engine, session
 from datetime import datetime
-
+from rich.console import Console # type: ignore
+console = Console()
 Base = declarative_base()
 
 class User(Base):
@@ -31,7 +31,8 @@ class User(Base):
         return email
 
     def __repr__(self):
-        return f"<User(name={self.name}, email={self.email})>"
+        if self.role=="Admin":
+            return f"<User(name={self.name}, email={self.email})>"
 
 # Create the table
 Base.metadata.create_all(engine)
@@ -42,8 +43,7 @@ def create_user(name, email, password,role="Admin"):
     user = User(name=name, email=email, password=password,role=role)
     session.add(user)
     session.commit()
-    print(f"User created: {user}")
-    return user
+    console.print(f"{name} has ben registered successfully for the {role} role.", style="bold green")
 
 #method to delete the table
 def delete_table():
