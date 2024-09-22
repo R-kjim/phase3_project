@@ -28,7 +28,7 @@ class Course(Base):
 
 # Create the courses table
 Base.metadata.create_all(engine)
-
+# Base.metadata.drop_all(engine)
 # Methods for creating a course
 def create_course(title, instructor_id, category):
     """Create a new course."""

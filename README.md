@@ -9,7 +9,7 @@ To address these challenges, I will develop an Online Course Platform using Pyth
 # Deliverables
 
 ## Database Design
-![alt text](<Screenshot from 2024-09-21 15-26-43.png>)
+![alt text](<assets/Screenshot from 2024-09-21 15-26-43.png>)
 
 ### Users Table: 
 Stores user information, including user role (student or instructor), name, email, and password.

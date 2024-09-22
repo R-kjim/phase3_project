@@ -116,9 +116,9 @@ def course_menu(course_id):
         course_menu(course_id)
     if choice=="3":
         print("Select a lesson")
-        print(all_course_lessons(course_id)["table"])
+        print(all_course_lessons1(course_id)["table"])
         lesson_id1=Prompt.ask("Enter")
-        if int(lesson_id1) not in [lesson.id for lesson in all_course_lessons(course_id)["lessons"]]:
+        if int(lesson_id1) not in [lesson.id for lesson in all_course_lessons1(course_id)["lessons"]]:
             print("Enter a valid lesson")
             lesson_id1=Prompt.ask("Enter")
         question=Prompt.ask("Enter question")
@@ -179,6 +179,12 @@ def student_menu(value):
                         is_correct=False
                     add_score(value.id,int(choice2),quiz.id,is_correct)
                 console.print(f"You scored {lesson_score(int(choice2),value.id)}")
+                print("1. Back to start page\n2. Logout")
+                option=Prompt.ask("Select")
+                if option=="1":
+                    student_menu(value)
+                if option=="2":
+                    start_page()
             if choice3=="2":
                 student_menu(value)
             if choice3=="3":

@@ -25,7 +25,7 @@ class Enrollment(Base):
         return f"<Enrollment(student_id={self.student_id}, course_id={self.course_id}, is_enrolled={self.is_enrolled})>"
 
 Base.metadata.create_all(engine)
-
+# Base.metadata.drop_all(engine)
 # Method to enroll a student
 def enroll(student_id,course_id,is_enrolled=True,):
     enrollment1=Enrollment(student_id,course_id,is_enrolled)

@@ -75,6 +75,16 @@ def all_course_lessons(course_id,student_id):
     table=tabulate(rows,headers,tablefmt="fancy_grid")
     return {"lessons":lessons,"table":table}
 
+#method that returns all lessons for a course generally
+def all_course_lessons1(course_id):
+    from scores import lesson_score
+    """Get all lessons of a course"""
+    lessons=session.query(Lesson).filter_by(course_id=course_id).all()
+    headers=["Lesson ID","Lesson Title"]
+    rows=[[lesson.id,lesson.title]for lesson in lessons]
+    table=tabulate(rows,headers,tablefmt="fancy_grid")
+    return {"lessons":lessons,"table":table}
+
 #method that returns a single instance of a lesson, its table representation and a table representation of its contents
 def lesson_instance(lesson_id):
     lesson=session.query(Lesson).filter_by(id=lesson_id).one()
